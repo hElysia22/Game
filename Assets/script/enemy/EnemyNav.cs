@@ -9,11 +9,12 @@ public class EnemyNav : MonoBehaviour
     private string playerTag = "Player";
     public float updateInterval = 0.3f;
     private float timer = 0;
+    private float moveSpeed = 8f;
 
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-    }
+    } 
 
     private void Update()
     {
@@ -26,12 +27,18 @@ public class EnemyNav : MonoBehaviour
             {
                 if(Vector3.Distance(transform.position, target.position) > agent.stoppingDistance)
                 {
+                    agent.speed = moveSpeed;
                     agent.SetDestination(target.position);
                 }
                 else
                 {
+                    agent.speed = 0;
                     agent.ResetPath();
                 }
+            }
+            else
+            {
+                agent.speed = 0;
             }
         }
         

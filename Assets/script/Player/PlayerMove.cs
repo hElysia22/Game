@@ -13,6 +13,8 @@ public class PlayerMove : MonoBehaviour
     private Animator _animator;
     private bool _isRunning = false;
     private Vector3 _velocity;
+    protected int velX = Animator.StringToHash("v_h");
+    protected int velZ = Animator.StringToHash("v_v");
     // Start is called before the first frame update
     void Start()
     {
@@ -71,15 +73,15 @@ public class PlayerMove : MonoBehaviour
             {
                 rb.velocity = new Vector3(moveDir.x * moveSpeed, 0f, moveDir.z * moveSpeed);
             }
-            _animator.SetFloat("v_h", _velocity.x);
-            _animator.SetFloat("v_v", _velocity.z);
+            _animator.SetFloat(velX, _velocity.x);
+            _animator.SetFloat(velZ, _velocity.z);
         }
         else
         {
             // 无输入时停止移动（重置X/Z轴速度）
             rb.velocity = new Vector3(0f, 0f, 0f);
-            _animator.SetFloat("v_h", _velocity.x);
-            _animator.SetFloat("v_v", _velocity.z);
+            _animator.SetFloat(velX, _velocity.x);
+            _animator.SetFloat(velZ, _velocity.z);
         }
     }
 }

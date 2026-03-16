@@ -1,33 +1,43 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyMinin : enemyBase
 {
-    Animator animator;
+    private NavMeshAgent agent;
 
-    private void Awake()
+    private void Start()
     {
-        base.Awake();
-        animator = GetComponent<Animator>();
+        agent = GetComponent<NavMeshAgent>();
     }
+
+    protected override void Update()
+    {
+        base.Update();
+        //目前存在问题：水平方向速度还未解决
+        if(agent.velocity.magnitude > 0.01f)
+        {
+            OnMove(agent.velocity.x, agent.velocity.z);
+        }
+        else
+        {
+            OnMove(0, 0);
+        }
+    }
+
+    
     protected override void Die()
     {
         Debug.Log("小怪死亡");
         Destroy(gameObject);
     }
 
-    private void Update()
-    {
-        if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.7f && animator.GetCurrentAnimatorStateInfo(0).IsName("Hit_F_1"))
-        {
-            animator.SetBool("Onhit", false);
-        }
-    }
 
     protected override void OnTakeDamage(int damage)
     {
-        animator.SetBool("Onhit", true);
+        base.OnTakeDamage(damage);
         Debug.Log("小怪受到伤害"+damage);
     }
 
