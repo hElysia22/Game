@@ -6,7 +6,7 @@ using UnityEngine;
 public abstract class enemyBase : MonoBehaviour
 {
     public int maxHealth;
-    private int _currentHealth;
+    protected int _currentHealth;
     protected Animator animator;
     public float healthRatio => (float)_currentHealth/maxHealth;
     protected int velX = Animator.StringToHash("v_h");
@@ -18,6 +18,10 @@ public abstract class enemyBase : MonoBehaviour
         if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.7f && animator.GetCurrentAnimatorStateInfo(0).IsName("Hit_F_1"))
         {
             animator.SetBool("Onhit", false);
+        }
+        if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.7f && animator.GetCurrentAnimatorStateInfo(0).IsName("attack1"))
+        {
+            animator.SetBool("isAttack", false);
         }
     }
     public void TakeDamage(int damage)
@@ -43,6 +47,11 @@ public abstract class enemyBase : MonoBehaviour
     protected virtual void OnHit()
     {
         animator.SetBool("Onhit", true);
+    }
+
+    protected virtual void Attack()
+    {
+        animator.SetBool("isAttack", true);
     }
 
     protected virtual void OnMove(float v_h, float v_v)
