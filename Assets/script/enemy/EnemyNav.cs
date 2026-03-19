@@ -5,11 +5,11 @@ public class EnemyNav : MonoBehaviour
 {
     private Transform target;
     private NavMeshAgent agent;
-    public float searchRadius = 50f;
+    public float searchRadius = 70f;
     private string playerTag = "Player";
     public float updateInterval = 0.3f;
     private float timer = 0;
-    private float moveSpeed = 8f;
+    private float moveSpeed = 20f;
 
     private void Start()
     {

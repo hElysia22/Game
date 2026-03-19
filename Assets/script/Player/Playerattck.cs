@@ -43,6 +43,11 @@ public class Playerattck : MonoBehaviour
             _animator.SetBool("attack3", false);
             numOfClick = 0;
         }
+        if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.7f && _animator.GetCurrentAnimatorStateInfo(0).IsName("Onhit"))
+        {
+            _animator.SetBool("Onhit", false);
+            numOfClick = 0;
+        }
 
         if (Time.time - lastClickTime > MaxComboDely)
         {

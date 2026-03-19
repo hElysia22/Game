@@ -2,16 +2,19 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
     public int maxHealth = 200;
     private int _currentHealth;
+    private Animator _animator;
     // Start is called before the first frame update
     private void Awake()
     {
         _currentHealth = maxHealth;
+        _animator = GetComponent<Animator>();
     }
 
     public float healthRatio => (float)_currentHealth / maxHealth;
@@ -38,7 +41,7 @@ public class PlayerHealth : MonoBehaviour
 
     private void OnTakeDamage(int damage)
     {
-        
+        _animator.SetBool("Onhit", true);
     }
 
 }
