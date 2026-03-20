@@ -43,11 +43,6 @@ public class weapon : MonoBehaviour
         {
             return;
         }
-        if (_animator == null)
-        {
-            Debug.Log("Œ¥’“µΩanimator");
-            return;
-        }
         if (!isAttack1 && _animator.GetCurrentAnimatorStateInfo(0).IsName("attack1") && _animator.GetCurrentAnimatorStateInfo(0).normalizedTime <= 0.5f)
         {
             isAttack1 = true;

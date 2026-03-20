@@ -58,7 +58,6 @@ public class Playerattck : MonoBehaviour
         }
 
 
-
         if (Input.GetMouseButtonDown(0))
         {
             lastClickTime = Time.time;

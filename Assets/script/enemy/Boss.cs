@@ -1,16 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
-using static UnityEngine.GraphicsBuffer;
 
-public class EnemyMinin : enemyBase
+public class Boss : enemyBase
 {
     private NavMeshAgent agent;
-    private float attackReduis = 17f;
+    private float attackReduis = 25f;
     private string playerTag = "Player";
-    private float attackInterval = 6f;
+    private float attackInterval = 5f;
     private float timer = 0;
     private bool isAttack = false;
 
@@ -22,7 +20,12 @@ public class EnemyMinin : enemyBase
     protected override void Update()
     {
         base.Update();
-        if(agent.velocity.magnitude > 0.01f)
+        if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.7f && animator.GetCurrentAnimatorStateInfo(0).IsName("attack2"))
+        {
+            animator.SetBool("isAttack2", false);
+        }
+
+        if (agent.velocity.magnitude > 0.01f)
         {
             OnMove(agent.velocity.x, agent.velocity.z);
         }
@@ -31,12 +34,12 @@ public class EnemyMinin : enemyBase
             OnMove(0, 0);
         }
         timer += Time.deltaTime;
-        if(timer >= attackInterval)
+        if (timer >= attackInterval)
         {
             timer = 0;
             isAttack = true;
         }
-        if(isAttack)
+        if (isAttack)
         {
             Attack();
             isAttack = false;
@@ -51,6 +54,7 @@ public class EnemyMinin : enemyBase
             if (collider.CompareTag(playerTag))
             {
                 base.Attack();
+                animator.SetBool("isAttack2", true);
                 break;
             }
         }
@@ -58,15 +62,14 @@ public class EnemyMinin : enemyBase
 
     protected override void Die()
     {
-        Debug.Log("小怪死亡");
+        Debug.Log("Boss死亡");
         Destroy(gameObject);
+        //游戏结束
+
     }
-
-
     protected override void OnTakeDamage(int damage)
     {
         base.OnTakeDamage(damage);
-        Debug.Log("小怪受到伤害"+damage);
+        Debug.Log("boss 受到伤害" + damage);
     }
-
 }

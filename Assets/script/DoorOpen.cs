@@ -30,7 +30,6 @@ public class DoorOpen : MonoBehaviour
     {
        
         float distance = Vector3.Distance(Player.position, DetectPoint.position);
-        Debug.Log("æ‡¿Î£∫" + distance);
         if (distance < detectRange) 
         {
             isOpen = true;

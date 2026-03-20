@@ -41,7 +41,6 @@ public class BloodBase : MonoBehaviour
 
     void changeBlood()
     {
-        Debug.Log("触发扣血");
         targetBlood = enemy.healthRatio;
         image.fillAmount = targetBlood;
     }
