@@ -7,9 +7,13 @@ public class EnemyNav : MonoBehaviour
     private NavMeshAgent agent;
     public float searchRadius = 70f;
     private string playerTag = "Player";
-    public float updateInterval = 0.3f;
     private float timer = 0;
     private float moveSpeed = 20f;
+    private float stopDis = 0f;
+    //巡逻点
+    public Transform[] PatrolPoint;
+    private int currentPoint = 0;
+    private bool isReadyToSwitch = true; // 防止频繁切换
 
     private void Start()
     {
@@ -18,13 +22,12 @@ public class EnemyNav : MonoBehaviour
 
     private void Update()
     {
-        timer += Time.deltaTime;
-        if (timer > updateInterval)
-        {
             SearchPlayer();
             timer = 0;
             if(target != null)
             {
+                stopDis = 20f;
+                agent.stoppingDistance = stopDis;
                 if(Vector3.Distance(transform.position, target.position) > agent.stoppingDistance)
                 {
                     agent.speed = moveSpeed;
@@ -38,12 +41,31 @@ public class EnemyNav : MonoBehaviour
             }
             else
             {
-                agent.speed = 0;
-            }
-        }
-        
+                if(PatrolPoint.Length != 0)
+                {
+                   AIPatrol();
+                }
+                else
+                {
+                    agent.speed = 0;
+                    agent.ResetPath();
+                }
+            } 
     }
 
+    private void AIPatrol()
+    {
+        agent.speed = moveSpeed;
+        stopDis = 0.1f;
+        agent.stoppingDistance = stopDis;
+        agent.SetDestination(PatrolPoint[currentPoint].position);
+        Debug.Log("距离" + Vector3.Distance(transform.position, PatrolPoint[currentPoint].position));
+        if (isReadyToSwitch && agent.remainingDistance <= agent.stoppingDistance && !agent.pathPending)
+        {
+            // 两点巡逻
+            currentPoint = currentPoint == 0 ? 1 : 0;
+        }
+    }
     private void SearchPlayer()
     {
         target = null;
@@ -56,6 +78,11 @@ public class EnemyNav : MonoBehaviour
                 break;
             }
         }
+    }
+
+    void ResetSwitch()
+    {
+        isReadyToSwitch = true;
     }
 
     void OnDrawGizmosSelected()

@@ -1,12 +1,9 @@
-using JetBrains.Annotations;
-using System.Collections;
-using System.Collections.Generic;
+锘縰sing System.Collections;
 using UnityEngine;
 
 public class DoorOpen : MonoBehaviour
 {
-    //之后添加一个要钥匙才能开门的代码
-    private static bool hasKey = false;
+    private bool hasKey = false; 
 
     public float openAngle = -90;
     public float rotateSpeed = 1f;
@@ -17,7 +14,9 @@ public class DoorOpen : MonoBehaviour
     private Transform Player;
     private Quaternion openRot;
     private Quaternion closeRot;
-    // Start is called before the first frame update
+
+    private Coroutine rotateCoroutine;
+
     void Start()
     {
         Player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -25,33 +24,41 @@ public class DoorOpen : MonoBehaviour
         openRot = closeRot * Quaternion.Euler(0, openAngle, 0);
     }
 
-    // Update is called once per frame
     void Update()
     {
-       
         float distance = Vector3.Distance(Player.position, DetectPoint.position);
-        if (distance < detectRange && hasKey) 
+        bool shouldOpen = distance < detectRange && hasKey;
+
+        if (shouldOpen != isOpen)
         {
-            isOpen = true;
-            Debug.Log("开门");
+            isOpen = shouldOpen;
+            if (rotateCoroutine != null)
+                StopCoroutine(rotateCoroutine);
+
+            rotateCoroutine = StartCoroutine(RotateDoor(isOpen));
         }
-        else
+    }
+
+    IEnumerator RotateDoor(bool open)
+    {
+        Quaternion targetRot = open ? openRot : closeRot;
+
+        while (Quaternion.Angle(transform.rotation, targetRot) > 0.1f)
         {
-            isOpen = false;
+            transform.rotation = Quaternion.Lerp(
+                transform.rotation,
+                targetRot,
+                rotateSpeed * Time.deltaTime
+            );
+
+            yield return null;
         }
-        if(isOpen)
-        {
-            transform.rotation = Quaternion.Slerp(transform.rotation, openRot, rotateSpeed * Time.deltaTime);
-        }
-        else
-        {
-            transform.rotation = Quaternion.Slerp(transform.rotation, closeRot, rotateSpeed * Time.deltaTime);
-        }
+        transform.rotation = targetRot;
     }
 
     public void GetKey()
     {
         hasKey = true;
-        Debug.Log("获得钥匙");
+        Debug.Log("鑾峰緱閽ュ寵");
     }
 }

@@ -21,7 +21,7 @@ public class Boss : enemyBase
     protected override void Update()
     {
         base.Update();
-        if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.7f && animator.GetCurrentAnimatorStateInfo(0).IsName("attack2"))
+        if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.7f && animator.GetCurrentAnimatorStateInfo(0).IsName("attack2") || !animator.GetCurrentAnimatorStateInfo(0).IsName("attack2"))
         {
             animator.SetBool("isAttack2", false);
         }
