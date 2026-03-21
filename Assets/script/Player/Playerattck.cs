@@ -30,17 +30,18 @@ public class Playerattck : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.7f && _animator.GetCurrentAnimatorStateInfo(0).IsName("attack1"))
+        if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.7f && _animator.GetCurrentAnimatorStateInfo(0).IsName("attack1") || !_animator.GetCurrentAnimatorStateInfo(0).IsName("attack1"))
         {
             _animator.SetBool("attack1", false);
         }
-        if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.7f && _animator.GetCurrentAnimatorStateInfo(0).IsName("attack2"))
+        if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.7f && _animator.GetCurrentAnimatorStateInfo(0).IsName("attack2") || !_animator.GetCurrentAnimatorStateInfo(0).IsName("attack2"))
         {
             _animator.SetBool("attack2", false);
         }
         if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.7f && _animator.GetCurrentAnimatorStateInfo(0).IsName("attack3"))
         {
             _animator.SetBool("attack3", false);
+            _animator.SetBool("Onhit", false);
             numOfClick = 0;
         }
         if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.7f && _animator.GetCurrentAnimatorStateInfo(0).IsName("Onhit"))

@@ -6,7 +6,7 @@ using UnityEngine;
 public class DoorOpen : MonoBehaviour
 {
     //之后添加一个要钥匙才能开门的代码
-    private bool hasKey = false;
+    private static bool hasKey = false;
 
     public float openAngle = -90;
     public float rotateSpeed = 1f;
@@ -30,7 +30,7 @@ public class DoorOpen : MonoBehaviour
     {
        
         float distance = Vector3.Distance(Player.position, DetectPoint.position);
-        if (distance < detectRange) 
+        if (distance < detectRange && hasKey) 
         {
             isOpen = true;
             Debug.Log("开门");
@@ -42,7 +42,6 @@ public class DoorOpen : MonoBehaviour
         if(isOpen)
         {
             transform.rotation = Quaternion.Slerp(transform.rotation, openRot, rotateSpeed * Time.deltaTime);
-            hasKey = false;
         }
         else
         {

@@ -19,7 +19,7 @@ public abstract class enemyBase : MonoBehaviour
         {
             animator.SetBool("Onhit", false);
         }
-        if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.7f && animator.GetCurrentAnimatorStateInfo(0).IsName("attack1"))
+        if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.7f && animator.GetCurrentAnimatorStateInfo(0).IsName("attack1") || !animator.GetCurrentAnimatorStateInfo(0).IsName("attack1"))
         {
             animator.SetBool("isAttack", false);
         }

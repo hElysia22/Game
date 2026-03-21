@@ -10,7 +10,7 @@ public class EnemyMinin : enemyBase
     private NavMeshAgent agent;
     private float attackReduis = 17f;
     private string playerTag = "Player";
-    private float attackInterval = 6f;
+    private float attackInterval = 4f;
     private float timer = 0;
     private bool isAttack = false;
 
@@ -59,6 +59,11 @@ public class EnemyMinin : enemyBase
     protected override void Die()
     {
         Debug.Log("–°π÷À¿Õˆ");
+        DoorOpen door = FindObjectOfType<DoorOpen>();
+        if (door != null)
+        {
+            door.GetKey();
+        }
         Destroy(gameObject);
     }
 

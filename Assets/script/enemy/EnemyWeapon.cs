@@ -43,11 +43,10 @@ public class EnemyWeapon : MonoBehaviour
                 if (playerShield != null && PlayerShield.isShieldUp)
                 {
                     playerShield.PlayShieldHit();
-                    Debug.Log("盾牌格挡成功 → 播放 shieldHit 动画");
                 }
                 else
                 {
-                    Debug.Log("命中玩家 → 掉血");
+                    Debug.Log("命中玩家 掉血");
                     playerHealth.TakeDamage(20);
                 }
             }
@@ -62,7 +61,6 @@ public class EnemyWeapon : MonoBehaviour
                 if (playerShield != null && PlayerShield.isShieldUp)
                 {
                     playerShield.PlayShieldHit();
-                    Debug.Log("盾牌格挡成功 → 播放 shieldHit 动画");
                 }
                 else
                 {

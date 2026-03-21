@@ -37,7 +37,7 @@ public class PlayerHealth : MonoBehaviour
         Debug.Log("Íæ¼ÒËÀÍö");
         Destroy(gameObject);
         //ÓÎÏ·½áÊø
-        SceneManager.LoadScene("");
+        SceneManager.LoadScene("StartScene");
     }
 
     private void OnTakeDamage(int damage)

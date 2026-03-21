@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class Boss : enemyBase
 {
@@ -65,7 +66,7 @@ public class Boss : enemyBase
         Debug.Log("BossËÀÍö");
         Destroy(gameObject);
         //ÓÎÏ·½áÊø
-
+        SceneManager.LoadScene("StartScene");
     }
     protected override void OnTakeDamage(int damage)
     {
