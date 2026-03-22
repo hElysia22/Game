@@ -11,13 +11,11 @@ public class DoorOpen : MonoBehaviour
     public Transform DetectPoint;
 
     private bool isOpen = false;
-    private Transform Player;
+    public Transform Player;
     private Quaternion openRot;
     private Quaternion closeRot;
     public GameObject Massage;
     private Coroutine rotateCoroutine;
-
-    public static DoorOpen Instance;
 
     void Start()
     {
@@ -26,12 +24,13 @@ public class DoorOpen : MonoBehaviour
             if (GameObject.FindGameObjectWithTag("Player") != null)
             {
                 Player = GameObject.FindGameObjectWithTag("Player").transform;
-            }    
+            }
+            else
+            {
+                Debug.Log("未找到玩家");
+            }
         }
-        else
-        {
-            Debug.Log("未找到玩家");
-        }
+        
         closeRot = transform.rotation;
         openRot = closeRot * Quaternion.Euler(0, openAngle, 0);
     }
@@ -43,13 +42,14 @@ public class DoorOpen : MonoBehaviour
             return;
         }
         float distance = Vector3.Distance(Player.position, DetectPoint.position);
-        if(!hasKey && distance <= detectRange)
+        Debug.Log("" + distance);
+        if (!hasKey && distance <= detectRange)
         {
-            if(Massage != null)
+            if (Massage != null)
             {
                 Massage.SetActive(true);
             }
-            
+
         }
         else
         {
