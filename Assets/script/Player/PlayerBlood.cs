@@ -23,6 +23,7 @@ public class PlayerBlood : MonoBehaviour
         if(player == null)
         {
             Debug.Log("Î´ÕÒµ½Íæ¼Ò");
+            return;
         }
     }
     // Start is called before the first frame update
@@ -55,8 +56,6 @@ public class PlayerBlood : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-
         //»ºÂý¼õÑª
         if (currentBlood > targetBlood)
         {

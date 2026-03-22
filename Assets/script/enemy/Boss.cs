@@ -9,9 +9,10 @@ public class Boss : enemyBase
     private NavMeshAgent agent;
     private float attackReduis = 25f;
     private string playerTag = "Player";
-    private float attackInterval = 5f;
+    private float attackInterval = 3f;
     private float timer = 0;
     private bool isAttack = false;
+    public GameObject WinPanel;
 
     private void Start()
     {
@@ -21,9 +22,10 @@ public class Boss : enemyBase
     protected override void Update()
     {
         base.Update();
-        if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.7f && animator.GetCurrentAnimatorStateInfo(0).IsName("attack2") || !animator.GetCurrentAnimatorStateInfo(0).IsName("attack2"))
+        if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.7f && animator.GetCurrentAnimatorStateInfo(0).IsName("attack2"))
         {
             animator.SetBool("isAttack2", false);
+            animator.SetBool("Onhit", false);
         }
 
         if (agent.velocity.magnitude > 0.01f)
@@ -64,10 +66,17 @@ public class Boss : enemyBase
     protected override void Die()
     {
         Debug.Log("BossËÀÍö");
+        GameObject temp = new GameObject("SceneLoader");
+        SceneLoader loader = temp.AddComponent<SceneLoader>();
+        loader.LoadSceneDelayed();
         Destroy(gameObject);
         //ÓÎÏ·½áÊø
-        SceneManager.LoadScene("StartScene");
+        if(WinPanel!= null)
+        {
+            WinPanel.gameObject.SetActive(true);
+        }
     }
+
     protected override void OnTakeDamage(int damage)
     {
         base.OnTakeDamage(damage);

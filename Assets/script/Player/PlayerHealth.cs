@@ -10,6 +10,7 @@ public class PlayerHealth : MonoBehaviour
     public int maxHealth = 200;
     private int _currentHealth;
     private Animator _animator;
+    public GameObject LosePanel;
     // Start is called before the first frame update
     private void Awake()
     {
@@ -35,9 +36,16 @@ public class PlayerHealth : MonoBehaviour
     private void Die()
     {
         Debug.Log("ÕÊº“À¿Õˆ");
+        
+        GameObject temp = new GameObject("SceneLoader");
+        SceneLoader loader = temp.AddComponent<SceneLoader>();
+        loader.LoadSceneDelayed();
         Destroy(gameObject);
         //”Œœ∑Ω· ¯
-        SceneManager.LoadScene("StartScene");
+        if (LosePanel != null)
+        {
+            LosePanel.SetActive(true);
+        }
     }
 
     private void OnTakeDamage(int damage)

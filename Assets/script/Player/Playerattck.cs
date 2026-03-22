@@ -30,7 +30,9 @@ public class Playerattck : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.7f && _animator.GetCurrentAnimatorStateInfo(0).IsName("attack1") || !_animator.GetCurrentAnimatorStateInfo(0).IsName("attack1"))
+        
+
+        if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.7f && _animator.GetCurrentAnimatorStateInfo(0).IsName("attack1") )
         {
             _animator.SetBool("attack1", false);
         }

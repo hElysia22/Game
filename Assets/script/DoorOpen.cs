@@ -14,21 +14,51 @@ public class DoorOpen : MonoBehaviour
     private Transform Player;
     private Quaternion openRot;
     private Quaternion closeRot;
-
+    public GameObject Massage;
     private Coroutine rotateCoroutine;
+
+    public static DoorOpen Instance;
 
     void Start()
     {
-        Player = GameObject.FindGameObjectWithTag("Player").transform;
+        if (Player == null)
+        {
+            if (GameObject.FindGameObjectWithTag("Player") != null)
+            {
+                Player = GameObject.FindGameObjectWithTag("Player").transform;
+            }    
+        }
+        else
+        {
+            Debug.Log("未找到玩家");
+        }
         closeRot = transform.rotation;
         openRot = closeRot * Quaternion.Euler(0, openAngle, 0);
     }
 
     void Update()
     {
+        if (Player == null || DetectPoint == null)
+        {
+            return;
+        }
         float distance = Vector3.Distance(Player.position, DetectPoint.position);
+        if(!hasKey && distance <= detectRange)
+        {
+            if(Massage != null)
+            {
+                Massage.SetActive(true);
+            }
+            
+        }
+        else
+        {
+            if (Massage != null)
+            {
+                Massage.SetActive(false);
+            }
+        }
         bool shouldOpen = distance < detectRange && hasKey;
-
         if (shouldOpen != isOpen)
         {
             isOpen = shouldOpen;
@@ -59,6 +89,7 @@ public class DoorOpen : MonoBehaviour
     public void GetKey()
     {
         hasKey = true;
+        isOpen = false;
         Debug.Log("获得钥匙");
     }
 }

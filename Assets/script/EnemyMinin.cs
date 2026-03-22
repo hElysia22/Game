@@ -8,9 +8,9 @@ using static UnityEngine.GraphicsBuffer;
 public class EnemyMinin : enemyBase
 {
     private NavMeshAgent agent;
-    private float attackReduis = 17f;
+    private float attackReduis = 25f;
     private string playerTag = "Player";
-    private float attackInterval = 4f;
+    private float attackInterval = 3f;
     private float timer = 0;
     private bool isAttack = false;
 
@@ -59,8 +59,8 @@ public class EnemyMinin : enemyBase
     protected override void Die()
     {
         Debug.Log("–°π÷À¿Õˆ");
-        DoorOpen door = FindObjectOfType<DoorOpen>();
-        if (door != null)
+        DoorOpen[] allDoors = FindObjectsOfType<DoorOpen>();
+        foreach (DoorOpen door in allDoors)
         {
             door.GetKey();
         }
