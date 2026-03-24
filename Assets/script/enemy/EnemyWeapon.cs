@@ -28,8 +28,8 @@ public class EnemyWeapon : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        PlayerHealth playerHealth = other.GetComponent<PlayerHealth>();
-        if (playerHealth == null)
+        PlayerHp playerHp = other.GetComponent<PlayerHp>();
+        if (playerHp == null)
         {
             return;
         }
@@ -47,7 +47,7 @@ public class EnemyWeapon : MonoBehaviour
                 else
                 {
                     Debug.Log("命中玩家 掉血");
-                    playerHealth.TakeDamage(20);
+                    playerHp.TakeDamage(20);
                 }
             }
         }
@@ -65,7 +65,7 @@ public class EnemyWeapon : MonoBehaviour
                 else
                 {
                     Debug.Log("命中玩家 → 掉血");
-                    playerHealth.TakeDamage(20);
+                    playerHp.TakeDamage(20);
                 }
             }
         }
