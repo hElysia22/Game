@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 using TMPro;
 using UnityEngine;
 
-public class PlayerMove : MonoBehaviour
+public class p2 : MonoBehaviour
 {
     Rigidbody rb;
     public float moveSpeed;

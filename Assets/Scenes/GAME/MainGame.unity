@@ -322,6 +322,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &70312253
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 70312254}
+  m_Layer: 3
+  m_Name: target
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &70312254
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 70312253}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6146416746352695595}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &136866804
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -740,12 +771,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 6146416746352695595}
-  followTarget: {fileID: 5271876011584109778}
+  followTarget: {fileID: 70312254}
   distance: 40
-  sensitivity: 2
-  minVerticalAngle: -30
-  maxVerticalAngle: 60
-  turnSpeed: 5
 --- !u!1 &325092661
 GameObject:
   m_ObjectHideFlags: 0
@@ -6243,11 +6270,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 25fe73b87219bb249947e0a72b0e7e7c, type: 3}
---- !u!4 &5271876011584109778 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5980215570566119877, guid: 1b56216caa56aaf4ba028b3c02bfff24, type: 3}
-  m_PrefabInstance: {fileID: 9093717193997619016}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5499612964137782603
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6686,6 +6708,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1748749842258882779, guid: c00017d5d41df904eb182e5a5aa8ab72, type: 3}
+      propertyPath: m_Size.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3233779876469879688, guid: c00017d5d41df904eb182e5a5aa8ab72, type: 3}
       propertyPath: m_Name
       value: Floor_Flat
@@ -6924,6 +6950,9 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 7741031375431828591, guid: 1b56216caa56aaf4ba028b3c02bfff24, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 70312254}
     - targetCorrespondingSourceObject: {fileID: 5594704353539815814, guid: 1b56216caa56aaf4ba028b3c02bfff24, type: 3}
       insertIndex: -1
       addedObject: {fileID: 740261323}

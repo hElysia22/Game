@@ -42,7 +42,6 @@ public class DoorOpen : MonoBehaviour
             return;
         }
         float distance = Vector3.Distance(Player.position, DetectPoint.position);
-        Debug.Log("" + distance);
         if (!hasKey && distance <= detectRange)
         {
             if (Massage != null)
