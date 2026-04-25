@@ -4,13 +4,13 @@ using System.Runtime.CompilerServices;
 using TMPro;
 using UnityEngine;
 
-public class p2 : MonoBehaviour
+public class PlayerMove : MonoBehaviour
 {
     Rigidbody rb;
+    private Animator _animator;
     public float moveSpeed;
     public float runSpeed;
     public float turnSpeed = 10f;
-    private Animator _animator;
     private bool _isRunning = false;
     private Vector3 _velocity;
     protected int velX = Animator.StringToHash("v_h");
@@ -49,21 +49,20 @@ public class p2 : MonoBehaviour
 
         // 2. 归一化输入（避免斜向移动速度更快）
         Vector3 inputDir = new Vector3(horizontal, 0f, vertical).normalized;
-        if(_isRunning)
+        if (_isRunning)
         {
-             _velocity = new Vector3(horizontal, 0f, vertical) * runSpeed;
+            _velocity = new Vector3(horizontal, 0f, vertical) * runSpeed;
         }
         else
         {
             _velocity = new Vector3(horizontal, 0f, vertical) * moveSpeed;
         }
-        
+
 
         if (_velocity.magnitude > 0.01f) // 有有效输入时才处理移动
         {
             // 3. 计算基于相机水平朝向的移动方向（将玩家的本地输入方向，转换为相机视角下的世界方向）物体旋转在camera代码里写了,这里直接引用物体自身朝向
             Vector3 moveDir = Quaternion.Euler(0f, transform.eulerAngles.y, 0f) * inputDir;
-
             // 4. 设置刚体速度（只修改X/Z轴，Y轴保持0，避免浮空/下沉）
             if (_isRunning)
             {
@@ -84,4 +83,5 @@ public class p2 : MonoBehaviour
             _animator.SetFloat(velZ, _velocity.z);
         }
     }
+
 }
